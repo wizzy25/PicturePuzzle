@@ -1,5 +1,12 @@
-td {
+tr div {
+    font-size: 400%;
+    text-align: center;
     border: 2px solid black;
     width: 100px;
     height: 100px;
 }
+
+.gameTiles {
+    background-color: red;
+}
+
