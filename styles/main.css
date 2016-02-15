@@ -8,3 +8,6 @@
     display: inline-block;
     margin: 0px -4px 0 0;
 }
+.tileContainer {
+    display: inline-block;
+}

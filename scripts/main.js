@@ -13,17 +13,23 @@ $(function() {
     gameTiles.draggable('option', 'delay', 500);
 
     //INITIALIZE THE DROPPABLE TILES
-    gameTiles.droppable({
-        accept: 'td'
-    });
+
 
     gameTiles.on('dragcreate', function() {
         gameTiles.toggle('scale');
     });
 
+    //var replace = document.getElementsByClassName('gameTiles');
+
+        gameTiles.on('click mouseleave', function() {
+            alert('hello ' + this.textContent);
+        });
+
 
 });
 
+
+/*
 var ontop = document.getElementsByClassName('gameTiles');
 
 for (var i=0; x=0 < ontop.length; i++) {
@@ -35,3 +41,4 @@ for (var i=0; x=0 < ontop.length; i++) {
         this.style.zIndex = ontop.length+2;
     }, false)
 }
+*/
