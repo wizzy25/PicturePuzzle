@@ -3,42 +3,46 @@
  */
 $(function() {
 
-    var gameTiles = $('.gameTiles');
+    var $gameTiles = $('.gameTiles');
+    var $tileContainer = $('.tileContainer');
+    //CALL SWAP FUNCTION AT THE BEGINNING
+    initSwap();
 
-    var win = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36];
+    //DECLARE SWAP FUNCTION
+    function initSwap() {
+        initDroppable();
+        initDraggable();
+    }
 
-    //INITIALIZE THE DRAGGABLES
-    gameTiles.draggable();
-    gameTiles.draggable('option', 'opacity', 0.35);
-    gameTiles.draggable('option', 'delay', 500);
-
-    //INITIALIZE THE DROPPABLE TILES
-
-
-    gameTiles.on('dragcreate', function() {
-        gameTiles.toggle('scale');
-    });
-
-    //var replace = document.getElementsByClassName('gameTiles');
-
-        gameTiles.on('click mouseleave', function() {
-            alert('hello ' + this.textContent);
+    //DECLARE DRAGGABLE FUNCTION - MAKES TILES DRAGGABLE
+    function initDraggable() {
+        $('.gameTiles, .tileContainer').draggable({
+            appendTo: 'body',
+            helper: 'clone',
+            cursor: 'move',
+            revert: 'invalid'
         });
+    }
 
+    //DECLARE DROPPABLE FUNCTION - MAKES CONTAINERS DROPPABLE (Read documentation for details)
+    function initDroppable() {
+        $('.tileContainer, .gameTiles').droppable({
+            activeClass: 'ui-state-default',
+            hoverClass: 'ui-drop-hover',
+            accept: ':not(.ui-sortable-helper)',
 
+            over: function(event, ui) {
+                var $this = $(this);
+            },
+            drop: function(event, ui) {
+                //ON DROP, DELETE ORIGINAL CONTENT AND MOVE DESTINATION CONTENT TO SOURCE
+                var $this = $(this);
+                var linew1 = $(this).after(ui.draggable.clone());
+                var linew2 = $(ui.draggable).after($(this).clone());
+                $(ui.draggable).remove();
+                $(this).remove();
+                initSwap();
+            }
+        });
+    }
 });
-
-
-/*
-var ontop = document.getElementsByClassName('gameTiles');
-
-for (var i=0; x=0 < ontop.length; i++) {
-    ontop[i].addEventListener('mousedown', function() {
-        var prev = this;
-        if (prev) {
-            prev.style.zIndex = ontop.length+1;
-        }
-        this.style.zIndex = ontop.length+2;
-    }, false)
-}
-*/

@@ -11,3 +11,8 @@
 .tileContainer {
     display: inline-block;
 }
+.noEntry {
+    border: 2px blue dashed;
+    width: 200px;
+    height: 200px;
+}
