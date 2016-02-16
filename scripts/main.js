@@ -19,8 +19,10 @@ $(function() {
         $('.gameTiles, .tileContainer').draggable({
             appendTo: 'body',
             helper: 'clone',
-            cursor: 'move',
-            revert: 'invalid'
+            cursor: 'grab',
+            revert: 'invalid',
+            delay: '300',
+            opacity: '0.4'
         });
     }
 
@@ -32,17 +34,22 @@ $(function() {
             accept: ':not(.ui-sortable-helper)',
 
             over: function(event, ui) {
-                var $this = $(this);
+                $(this).attr('id','dropping');
+            },
+            out: function(event, ui) {
+                this.setAttribute('id', '')
             },
             drop: function(event, ui) {
                 //ON DROP, DELETE ORIGINAL CONTENT AND MOVE DESTINATION CONTENT TO SOURCE
-                var $this = $(this);
-                var linew1 = $(this).after(ui.draggable.clone());
-                var linew2 = $(ui.draggable).after($(this).clone());
-                $(ui.draggable).remove();
-                $(this).remove();
+                $(this).after(ui.draggable.clone()); //Clones the dragged tile
+                $(ui.draggable).after($(this).clone()).attr('id', ''); //Clones the destination tile
+                $(ui.draggable).remove(); //Removes the duplicate of the dragged tile
+                $(this).remove(); //Removes the duplicate of the destination tile
                 initSwap();
             }
         });
     }
+
 });
+
+Math.random();

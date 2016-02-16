@@ -16,3 +16,7 @@
     width: 200px;
     height: 200px;
 }
+#dropping {
+    box-shadow: 0 0 5em pink;
+    background-color: pink;
+}
