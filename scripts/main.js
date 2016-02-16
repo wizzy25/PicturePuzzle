@@ -5,6 +5,19 @@ $(function() {
 
     var $gameTiles = $('.gameTiles');
     var $tileContainer = $('.tileContainer');
+    var arrangedArray = newArr(36);
+    var randomizedArray = randomize(arrangedArray);
+
+    //PUSH TILES TO SCREEN (DECLARE FUNCTION AND CALL IT)
+    var fillScreen = function() {
+        var tiles = randomizedArray.length;
+        for (var i = 0; i < tiles; i++) {
+            $('<div class="tileContainer"><div class="gameTiles">' + (randomizedArray[i]) + '</div></div>').appendTo('#gamePlay');
+        }
+    };
+    fillScreen();
+
+
 
     //CALL SWAP FUNCTION AT THE BEGINNING
     initSwap();
@@ -55,14 +68,20 @@ $(function() {
 
 
 
+    //FUNCTION TO GENERATE NEW ARRAY
+    function newArr(numberOfElements) {
+        var gamArr = [];
+        for(var x=1; x<=numberOfElements; x++) {
+            gamArr.unshift(x);
+        }
+        return gamArr;
+    }
 
 
 
 
 
-
-
-
+    //RANDOMIZATION FUNCTION
     function randomize(arr) {
         for(var j, x, i = arr.length; i;
             j = parseInt(Math.random() * i), x = arr[--i], arr[i] = arr[j], arr[j] = x);
@@ -71,11 +90,3 @@ $(function() {
 
 
 });
-//PUSH TILES TO SCREEN
-var fillScreen = function() {
-    var tiles = 49;
-
-    for (var i = 0; i < tiles; i++) {
-        $('<div class="tileContainer"><div class="gameTiles">' + (i + 1) + '</div></div>').appendTo('#gamePlay');
-    }
-};
