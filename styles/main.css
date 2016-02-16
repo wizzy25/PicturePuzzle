@@ -1,7 +1,7 @@
 .gameTiles {
     font-size: 400%;
     text-align: center;
-    border: 2px solid black;
+    border: 0.03em solid black;
     width: 100px;
     height: 100px;
     background-color: red;

@@ -5,9 +5,9 @@ $(function() {
 
     var $gameTiles = $('.gameTiles');
     var $tileContainer = $('.tileContainer');
+
     //CALL SWAP FUNCTION AT THE BEGINNING
     initSwap();
-
     //DECLARE SWAP FUNCTION
     function initSwap() {
         initDroppable();
@@ -50,6 +50,32 @@ $(function() {
         });
     }
 
-});
 
-Math.random();
+
+
+
+
+
+
+
+
+
+
+
+
+    function randomize(arr) {
+        for(var j, x, i = arr.length; i;
+            j = parseInt(Math.random() * i), x = arr[--i], arr[i] = arr[j], arr[j] = x);
+        return arr;
+    };
+
+
+});
+//PUSH TILES TO SCREEN
+var fillScreen = function() {
+    var tiles = 49;
+
+    for (var i = 0; i < tiles; i++) {
+        $('<div class="tileContainer"><div class="gameTiles">' + (i + 1) + '</div></div>').appendTo('#gamePlay');
+    }
+};
