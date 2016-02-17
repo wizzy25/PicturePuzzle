@@ -5,18 +5,17 @@ $(function() {
 
     var $gameTiles = $('.gameTiles');
     var $tileContainer = $('.tileContainer');
-    var arrangedArray = newArr(36);
-    var randomizedArray = randomize(arrangedArray);
+    var tiles = 5;
+    var randomizedArray = randomize(newArr(tiles));
 
     //PUSH TILES TO SCREEN (DECLARE FUNCTION AND CALL IT)
     var fillScreen = function() {
         var tiles = randomizedArray.length;
         for (var i = 0; i < tiles; i++) {
-            $('<div class="tileContainer"><div class="gameTiles">' + (randomizedArray[i]) + '</div></div>').appendTo('#gamePlay');
+            $('<div class="tileContainer"><div class="gameTiles" value="'+(randomizedArray[i])+'">' + (randomizedArray[i]) + '</div></div>').appendTo('#gamePlay');
         }
     };
     fillScreen();
-
 
 
     //CALL SWAP FUNCTION AT THE BEGINNING
@@ -29,13 +28,27 @@ $(function() {
 
     //DECLARE DRAGGABLE FUNCTION - MAKES TILES DRAGGABLE
     function initDraggable() {
-        $('.gameTiles, .tileContainer').draggable({
+        $('.gameTiles').draggable({
             appendTo: 'body',
             helper: 'clone',
             cursor: 'grab',
             revert: 'invalid',
             delay: '300',
-            opacity: '0.4'
+            opacity: '0.4',
+            winningArray: newArr(tiles),
+            //DECLARE FUNCTION TO CHECK IF GAME IS WON AFTER EVERY MOVE
+            stop: function(){
+                //Get the current gameplay state
+                var gamePlayArray = [];
+                $('.gameTiles').each(function(){
+                    gamePlayArray.push($(this).attr('value'));
+                });
+                //Compare winning array with gameplay array
+                if(gamePlayArray == this.winningArray){
+                    alert()
+                }
+
+            }
         });
     }
 
@@ -59,6 +72,7 @@ $(function() {
                 $(ui.draggable).remove(); //Removes the duplicate of the dragged tile
                 $(this).remove(); //Removes the duplicate of the destination tile
                 initSwap();
+
             }
         });
     }
@@ -72,7 +86,7 @@ $(function() {
     function newArr(numberOfElements) {
         var gamArr = [];
         for(var x=1; x<=numberOfElements; x++) {
-            gamArr.unshift(x);
+            gamArr.push(x);
         }
         return gamArr;
     }
