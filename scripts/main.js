@@ -5,7 +5,7 @@ $(function() {
 
     var $gameTiles = $('.gameTiles');
     var $tileContainer = $('.tileContainer');
-    var tiles = 4;
+    var tiles = 36;
     var winArray = newArr(tiles);  //ALWAYS CORRECT
     var arrangedArray = newArr(tiles);
     var randomizedArray = randomize(arrangedArray);
@@ -39,8 +39,9 @@ $(function() {
                         gamArr.push($(this).attr('value'));
                     });
                     if (compareArrays(winArray, gamArr)) {
-                        alert('Eureka!');
+                        //alert('Eureka!');
                         $('.gameTiles').draggable('disable');
+                        $('#winGame').fadeIn(2000);
                     }
                 })
             }
@@ -54,7 +55,7 @@ $(function() {
             activeClass: 'ui-state-default',
             hoverClass: 'ui-drop-hover',
             accept: ':not(.ui-sortable-helper)',
-
+            tolerance: 'intersect',
             over: function(event, ui) {
                 $(this).attr('id','dropping');
             },

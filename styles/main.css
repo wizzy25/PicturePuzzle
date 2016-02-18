@@ -1,12 +1,30 @@
 .gameTiles {
     font-size: 400%;
     text-align: center;
-    border: 0.03em solid black;
+    border: 0.06em solid black;
     width: 100px;
     height: 100px;
     background-color: red;
     display: inline-block;
-    margin: 0px -4px 0 0;
+    margin: 0 -4px 0 0;
+}
+#winGame {
+    text-align: center;
+    color: mediumvioletred;
+    font-size: 250%;
+    font-family: cursive;
+    border: dashed mediumvioletred 3px;
+    background-color: lightpink;
+    width: 80%;
+    height: 50%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: none;
+
 }
 .tileContainer {
     display: inline-block;
