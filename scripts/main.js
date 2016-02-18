@@ -125,17 +125,23 @@ function newGame(tileNumber) {
     //FUNCTION TO RELOAD GAME ON PLAYER REQUEST WHEN GAME IS WON!
     $('#replay').click(function() {
         $('#gamePlay').empty();
-        $('#winGame').fadeOut(400);
+        $('#winGame').hide();
         newGame(tiles);
     });
     //FUNCTION TO RESET GAME ON USER REQUEST BEFORE GAME IS WON
     $('#resetGame').click(function() {
-        $('#gamePlay').empty();
         var userTiles = document.getElementById('tileNumber').value;
         if(!userTiles) {
+            $('#errorMessage').hide();
+            $('#gamePlay').empty();
             newGame(tiles);
         }
+        else if((Math.sqrt(userTiles)) !== (Math.floor(Math.sqrt(userTiles)))) {
+            $('#errorMessage').show();
+        }
         else {
+            $('#errorMessage').hide();
+            $('#gamePlay').empty();
             newGame(userTiles);
         }
     });
