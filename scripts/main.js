@@ -140,6 +140,9 @@ function newGame(tileNumber) {
             $('#gamePlay').empty();
             newGame(tiles);
         }
+        else if(userTiles==1) {
+            $('#errorMessage').show();
+        }
         else if((Math.sqrt(userTiles)) !== (Math.floor(Math.sqrt(userTiles)))) {
             $('#errorMessage').show();
         }
