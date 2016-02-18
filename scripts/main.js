@@ -36,7 +36,7 @@ function newGame() {
             opacity: '0.4',
             //DECLARE FUNCTION TO CHECK IF GAME IS WON AFTER EVERY MOVE
             stop: function(event, ui) {
-                $(this).delay().queue(function() {
+                $(this).delay(10).queue(function() {
                     var gamArr = [];
                     $('.gameTiles').each(function () {
                         gamArr.push($(this).attr('value'));
@@ -53,22 +53,20 @@ function newGame() {
     //DECLARE DROPPABLE FUNCTION - MAKES CONTAINERS DROPPABLE (Read documentation for details)
     function initDroppable() {
         $('.tileContainer, .gameTiles').droppable({
-            activeClass: 'ui-state-default',
-            hoverClass: 'ui-drop-hover',
-            accept: ':not(.ui-sortable-helper)',
             tolerance: 'intersect',
             over: function(event, ui) {
                 $(this).attr('id','dropping');
             },
             out: function(event, ui) {
-                this.setAttribute('id', '')
+                $(this).attr('id', '')
             },
             drop: function(event, ui) {
                 //ON DROP, DELETE ORIGINAL CONTENT AND MOVE DESTINATION CONTENT TO SOURCE
                 $(this).after(ui.draggable.clone()); //Clones the dragged tile
-                $(ui.draggable).after($(this).clone()).attr('id', ''); //Clones the destination tile
+                $(ui.draggable).after($(this).clone()); //Clones the destination tile
                 $(ui.draggable).remove(); //Removes the duplicate of the dragged tile
                 $(this).remove(); //Removes the duplicate of the destination tile
+                $('.gameTiles').delay().attr('id', '');
                 initSwap();
             }
         });
