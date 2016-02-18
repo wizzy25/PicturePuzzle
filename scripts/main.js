@@ -5,7 +5,7 @@ $(function() {
 
     var $gameTiles = $('.gameTiles');
     var $tileContainer = $('.tileContainer');
-    var tiles = 16;
+    var tiles = 4;
     var winArray = newArr(tiles);  //ALWAYS CORRECT
     var arrangedArray = newArr(tiles);
     var randomizedArray = randomize(arrangedArray);
@@ -24,7 +24,7 @@ $(function() {
 
     //DECLARE DRAGGABLE FUNCTION - MAKES TILES DRAGGABLE
     function initDraggable() {
-        $('.gameTiles').draggable({
+        $('.gameTiles').disableSelection().draggable({
             appendTo: 'body',
             helper: 'clone',
             cursor: 'grab',
@@ -40,6 +40,7 @@ $(function() {
                     });
                     if (compareArrays(winArray, gamArr)) {
                         alert('Eureka!');
+                        $('.gameTiles').draggable('disable');
                     }
                 })
             }
