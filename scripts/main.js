@@ -2,7 +2,7 @@
  * Created by Williamso on 15-Feb-16.
  */
 $(function() {
-    newGame(4);
+    newGame(25);
 });
 
 function newGame(tileNumber) {
