@@ -7,22 +7,24 @@
     background-color: red;
     display: inline-block;
     margin: 0 -4px 0 0;
+    cursor: default;
 }
 #winGame {
     text-align: center;
     color: mediumvioletred;
-    font-size: 250%;
+    font-size: 4vw;
     font-family: cursive;
     border: dashed mediumvioletred 3px;
     background-color: lightpink;
-    width: 80%;
-    height: 50%;
+    width: 80vw;
+    height: 45vw;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
+    overflow: visible;
     display: none;
 
 }
@@ -35,6 +37,30 @@
     height: 200px;
 }
 #dropping {
-    box-shadow: 0 0 5em pink;
-    background-color: pink;
+    box-shadow: 0 0 1em pink;
+    background-color: #ff4d4d;
+}
+.button {
+    border: mediumvioletred solid 2px;
+    display: inline-block;
+    width: 35vw;
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+
+}
+#replay:hover {
+    background-color: springgreen;
+}
+#noReplay:hover {
+    background-color: plum;
+}
+#replay:active {
+    background-color: yellowgreen;
+}
+#noReplay:active {
+    background-color: violet;
 }

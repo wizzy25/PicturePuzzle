@@ -5,7 +5,7 @@ $(function() {
 
     var $gameTiles = $('.gameTiles');
     var $tileContainer = $('.tileContainer');
-    var tiles = 16;
+    var tiles = 4;
     var winArray = newArr(tiles);  //ALWAYS CORRECT
     var arrangedArray = newArr(tiles);
     var randomizedArray = randomize(arrangedArray);
@@ -41,7 +41,7 @@ $(function() {
                     if (compareArrays(winArray, gamArr)) {
                         //alert('Eureka!');
                         $('.gameTiles').draggable('disable');
-                        $('#winGame').fadeIn(2000);
+                        $('#winGame').fadeIn(800);
                     }
                 })
             }
