@@ -5,11 +5,12 @@ $(function() {
 
     var $gameTiles = $('.gameTiles');
     var $tileContainer = $('.tileContainer');
-    var tiles = 5;
+    var tiles = 16;
     var winArray = newArr(tiles);  //ALWAYS CORRECT
     var arrangedArray = newArr(tiles);
     var randomizedArray = randomize(arrangedArray);
 
+    delete arrangedArray;
     //CALL FUNCTION TO PRINT TILES ON SCREEN
     fillScreen();
 
@@ -32,13 +33,13 @@ $(function() {
             opacity: '0.4',
             //DECLARE FUNCTION TO CHECK IF GAME IS WON AFTER EVERY MOVE
             stop: function(event, ui) {
-                $(this).delay(10).queue(function() {
+                $(this).delay().queue(function() {
                     var gamArr = [];
                     $('.gameTiles').each(function () {
                         gamArr.push($(this).attr('value'));
                     });
-                    if (compareArrays(arrangedArray, randomizedArray)) {
-                        alert(gamArr);
+                    if (compareArrays(winArray, gamArr)) {
+                        alert('Eureka!');
                     }
                 })
             }
