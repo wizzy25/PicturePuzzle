@@ -11,6 +11,9 @@ function newGame(tileNumber) {
     var winArray = newArr(tiles);  //ALWAYS CORRECT
     var arrangedArray = newArr(tiles);
     var randomizedArray = randomize(arrangedArray);
+    var moveCounter = 0;
+    var moveCount = document.getElementById('moveCount');
+    moveCount.textContent = '';
 
     //CALL FUNCTION TO PRINT TILES ON SCREEN
     fillScreen();
@@ -35,12 +38,13 @@ function newGame(tileNumber) {
             //DECLARE FUNCTION TO CHECK IF GAME IS WON AFTER EVERY MOVE
             stop: function(event, ui) {
                 $(this).delay(10).queue(function() {
+                    moveCounter ++;
+                    moveCount.textContent = 'Move: ' + moveCounter; //DISPLAY NUMBER OF MOVES MADE
                     var gamArr = [];
                     $('.gameTiles').each(function () {
                         gamArr.push($(this).attr('value'));
                     });
                     if (compareArrays(winArray, gamArr)) {
-                        //alert('Eureka!');
                         $('.gameTiles').draggable('disable');
                         $('#winGame').fadeIn(800);
                     }
