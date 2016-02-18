@@ -2,6 +2,10 @@
  * Created by Williamso on 15-Feb-16.
  */
 $(function() {
+    newGame();
+});
+
+function newGame() {
 
     var $gameTiles = $('.gameTiles');
     var $tileContainer = $('.tileContainer');
@@ -10,7 +14,6 @@ $(function() {
     var arrangedArray = newArr(tiles);
     var randomizedArray = randomize(arrangedArray);
 
-    delete arrangedArray;
     //CALL FUNCTION TO PRINT TILES ON SCREEN
     fillScreen();
 
@@ -47,8 +50,6 @@ $(function() {
             }
         });
     }
-
-
     //DECLARE DROPPABLE FUNCTION - MAKES CONTAINERS DROPPABLE (Read documentation for details)
     function initDroppable() {
         $('.tileContainer, .gameTiles').droppable({
@@ -72,9 +73,6 @@ $(function() {
             }
         });
     }
-
-
-
 
     //FUNCTION TO COMPARE GAMEPLAY TILES WITH WINNING TILES
     function compareArrays(arr1, arr2){
@@ -125,4 +123,14 @@ $(function() {
             j = parseInt(Math.random() * i), x = arr[--i], arr[i] = arr[j], arr[j] = x);
         return arr;
     }
-});
+    //FUNCTION TO NOT RELOAD GAME ON PLAYER REQUEST!
+    $('#noReplay').click(function() {
+        $('#winGame').fadeOut(800);
+    });
+    //FUNCTION TO RELOAD GAME ON PLAYER REQUEST!
+    $('#replay').click(function() {
+        $('#gamePlay').empty();
+        $('#winGame').fadeOut(400);
+        newGame();
+    })
+}
