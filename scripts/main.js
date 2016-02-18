@@ -100,8 +100,13 @@ $(function() {
     //FUNCTION TO PUSH TILES TO SCREEN
     function fillScreen() {
         var tiles = randomizedArray.length;
-        for (var i = 0; i < tiles; i++) {
-            $('<div class="tileContainer"><div class="gameTiles" value="'+(randomizedArray[i])+'">' + (randomizedArray[i]) + '</div></div>').appendTo('#gamePlay');
+        for (var i = tiles-1; i >= 0; i--) {
+            if(!((i%6) == 0)) {
+                $('<div class="tileContainer"><div class="gameTiles" value="'+(randomizedArray[i])+'">' + (randomizedArray[i]) + '</div></div>').appendTo('#gamePlay');
+            }
+            else {
+                $('<div class="tileContainer"><div class="gameTiles" value="'+(randomizedArray[i])+'">' + (randomizedArray[i]) + '</div></div><br/>').appendTo('#gamePlay');
+            }
         }
     }
 
