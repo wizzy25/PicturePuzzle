@@ -2,14 +2,12 @@
  * Created by Williamso on 15-Feb-16.
  */
 $(function() {
-    newGame();
+    newGame(4);
 });
 
-function newGame() {
+function newGame(tileNumber) {
 
-    var $gameTiles = $('.gameTiles');
-    var $tileContainer = $('.tileContainer');
-    var tiles = 4;
+    var tiles = tileNumber;
     var winArray = newArr(tiles);  //ALWAYS CORRECT
     var arrangedArray = newArr(tiles);
     var randomizedArray = randomize(arrangedArray);
@@ -106,7 +104,6 @@ function newGame() {
             }
         }
     }
-
     //FUNCTION TO GENERATE NEW ARRAY
     function newArr(numberOfElements) {
         var gamArr = [];
@@ -125,10 +122,21 @@ function newGame() {
     $('#noReplay').click(function() {
         $('#winGame').fadeOut(800);
     });
-    //FUNCTION TO RELOAD GAME ON PLAYER REQUEST!
+    //FUNCTION TO RELOAD GAME ON PLAYER REQUEST WHEN GAME IS WON!
     $('#replay').click(function() {
         $('#gamePlay').empty();
         $('#winGame').fadeOut(400);
-        newGame();
-    })
+        newGame(tiles);
+    });
+    //FUNCTION TO RESET GAME ON USER REQUEST BEFORE GAME IS WON
+    $('#resetGame').click(function() {
+        $('#gamePlay').empty();
+        var userTiles = document.getElementById('tileNumber').value;
+        if(!userTiles) {
+            newGame(tiles);
+        }
+        else {
+            newGame(userTiles);
+        }
+    });
 }
