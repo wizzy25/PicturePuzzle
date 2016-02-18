@@ -5,7 +5,7 @@ $(function() {
 
     var $gameTiles = $('.gameTiles');
     var $tileContainer = $('.tileContainer');
-    var tiles = 36;
+    var tiles = 16;
     var winArray = newArr(tiles);  //ALWAYS CORRECT
     var arrangedArray = newArr(tiles);
     var randomizedArray = randomize(arrangedArray);
@@ -100,8 +100,9 @@ $(function() {
     //FUNCTION TO PUSH TILES TO SCREEN
     function fillScreen() {
         var tiles = randomizedArray.length;
+        var rows = Math.floor(Math.sqrt(tiles));
         for (var i = tiles-1; i >= 0; i--) {
-            if(!((i%6) == 0)) {
+            if(!((i%rows) == 0)) {
                 $('<div class="tileContainer"><div class="gameTiles" value="'+(randomizedArray[i])+'">' + (randomizedArray[i]) + '</div></div>').appendTo('#gamePlay');
             }
             else {
