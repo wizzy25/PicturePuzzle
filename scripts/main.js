@@ -6,17 +6,12 @@ $(function() {
     var $gameTiles = $('.gameTiles');
     var $tileContainer = $('.tileContainer');
     var tiles = 5;
-    var randomizedArray = randomize(newArr(tiles));
+    var winArray = newArr(tiles);  //ALWAYS CORRECT
+    var arrangedArray = newArr(tiles);
+    var randomizedArray = randomize(arrangedArray);
 
-    //PUSH TILES TO SCREEN (DECLARE FUNCTION AND CALL IT)
-    var fillScreen = function() {
-        var tiles = randomizedArray.length;
-        for (var i = 0; i < tiles; i++) {
-            $('<div class="tileContainer"><div class="gameTiles" value="'+(randomizedArray[i])+'">' + (randomizedArray[i]) + '</div></div>').appendTo('#gamePlay');
-        }
-    };
+    //CALL FUNCTION TO PRINT TILES ON SCREEN
     fillScreen();
-
 
     //CALL SWAP FUNCTION AT THE BEGINNING
     initSwap();
@@ -35,22 +30,21 @@ $(function() {
             revert: 'invalid',
             delay: '300',
             opacity: '0.4',
-            winningArray: newArr(tiles),
             //DECLARE FUNCTION TO CHECK IF GAME IS WON AFTER EVERY MOVE
-            stop: function(){
-                //Get the current gameplay state
-                var gamePlayArray = [];
-                $('.gameTiles').each(function(){
-                    gamePlayArray.push($(this).attr('value'));
-                });
-                //Compare winning array with gameplay array
-                if(gamePlayArray == this.winningArray){
-                    alert()
-                }
-
+            stop: function(event, ui) {
+                $(this).delay(10).queue(function() {
+                    var gamArr = [];
+                    $('.gameTiles').each(function () {
+                        gamArr.push($(this).attr('value'));
+                    });
+                    if (compareArrays(arrangedArray, randomizedArray)) {
+                        alert(gamArr);
+                    }
+                })
             }
         });
     }
+
 
     //DECLARE DROPPABLE FUNCTION - MAKES CONTAINERS DROPPABLE (Read documentation for details)
     function initDroppable() {
@@ -72,7 +66,6 @@ $(function() {
                 $(ui.draggable).remove(); //Removes the duplicate of the dragged tile
                 $(this).remove(); //Removes the duplicate of the destination tile
                 initSwap();
-
             }
         });
     }
@@ -80,7 +73,34 @@ $(function() {
 
 
 
+    //FUNCTION TO COMPARE GAMEPLAY TILES WITH WINNING TILES
+    function compareArrays(arr1, arr2){
+        var result;
+        if(arr1.length != arr2.length) {
+            result = false;
+            return result;
+        }
+        else {
+            for(var i=0; i<arr1.length; i++) {
+                if(arr1[i]==arr2[i]){
+                    result = true;
+                }
 
+                else {
+                    result = false;
+                    break;
+                }
+            }
+            return result;
+        }
+    }
+    //FUNCTION TO PUSH TILES TO SCREEN
+    function fillScreen() {
+        var tiles = randomizedArray.length;
+        for (var i = 0; i < tiles; i++) {
+            $('<div class="tileContainer"><div class="gameTiles" value="'+(randomizedArray[i])+'">' + (randomizedArray[i]) + '</div></div>').appendTo('#gamePlay');
+        }
+    }
 
     //FUNCTION TO GENERATE NEW ARRAY
     function newArr(numberOfElements) {
@@ -90,17 +110,10 @@ $(function() {
         }
         return gamArr;
     }
-
-
-
-
-
     //RANDOMIZATION FUNCTION
     function randomize(arr) {
         for(var j, x, i = arr.length; i;
             j = parseInt(Math.random() * i), x = arr[--i], arr[i] = arr[j], arr[j] = x);
         return arr;
-    };
-
-
+    }
 });
